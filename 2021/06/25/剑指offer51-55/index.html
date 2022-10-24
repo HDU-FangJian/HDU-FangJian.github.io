@@ -1,0 +1,857 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avator.jpg">
+  <link rel="icon" href="/img/avator.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="pakchoi">
+  <meta name="keywords" content="">
+  
+  <title>剑指offer 51-55 - pakchoi&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"pakchoi007.gitee.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"64da8717546fc94735e3e2f05cfc89cb","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="pakchoi's blogs" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>pakchoi</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/wenzhang.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="剑指offer 51-55">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      pakchoi
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-25 14:03" pubdate>
+        2021年6月25日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      51
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">剑指offer 51-55</h1>
+            
+            <div class="markdown-body">
+              <h1 id="剑指offer-51-55"><a href="#剑指offer-51-55" class="headerlink" title="剑指offer    51~55"></a>剑指offer    51~55</h1><h2 id="五十一、构建乘积数组"><a href="#五十一、构建乘积数组" class="headerlink" title="五十一、构建乘积数组"></a>五十一、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/94a4d381a68b47b7a8bed86f2975db46?tpId=13&&tqId=11204&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">构建乘积数组</a></h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>给定一个数组A[0,1,…,n-1],请构建一个数组B[0,1,…,n-1],其中B中的元素B[i]=A[0] * A[1] * … * A[i-1] * A[i+1] * … * A[n-1]。<strong>不能使用除法</strong>。（注意：规定B[0] = A[1] * A[2] * … * A[n-1]，B[n-1] = A[0] * A[1] * … * A[n-2];）</p>
+<p>对于A长度为1的情况，B无意义，故而无法构建，因此该情况不会存在。</p>
+<h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">[<span class="hljs-number">120</span>,<span class="hljs-number">60</span>,<span class="hljs-number">40</span>,<span class="hljs-number">30</span>,<span class="hljs-number">24</span>]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">multiply</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; A)</span> </span>&#123;<br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(A.size())</span></span>;<br>        res[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; res.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            res[i] = res[i - <span class="hljs-number">1</span>] * A[i - <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = res.<span class="hljs-built_in">size</span>() - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            tmp *= A[i + <span class="hljs-number">1</span>];<br>            res[i] *= tmp;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析：</p>
+</blockquote>
+<p><strong>解题思路：</strong></p>
+<p>本题的难点在于 <strong>不能使用除法</strong> ，即需要 <strong>只用乘法</strong> 生成数组 B 。根据题目对 B[i] 的定义，可列表格，如下图所示。</p>
+<p>根据表格的主对角线（全为 1 ），可将表格分为 <strong>上三角</strong> 和 <strong>下三角</strong> 两部分。分别迭代计算下三角和上三角两部分的乘积，即可 <strong>不使用除法</strong> 就获得结果。</p>
+<p><img src="/2021/06/25/%E5%89%91%E6%8C%87offer51-55/6056c7a5009cb7a4674aab28505e598c502a7f7c60c45b9f19a8a64f31304745-Picture1.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>算法流程</strong>：</p>
+<ol>
+<li>初始化：数组 B ，其中 B[0] = 1 ；辅助变量 tmp = 1 ；</li>
+<li>计算 B[i] 的 <strong>下三角</strong> 各元素的乘积，直接乘入B[i] ；</li>
+<li>计算 B[i] 的 <strong>上三角</strong> 各元素的乘积，记为 tmp ，并乘入 B[i] ；</li>
+<li>返回 B 。</li>
+</ol>
+<h2 id="☆☆☆五十二、正则表达式匹配（困难）"><a href="#☆☆☆五十二、正则表达式匹配（困难）" class="headerlink" title="☆☆☆五十二、正则表达式匹配（困难）"></a>☆☆☆五十二、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/28970c15befb4ff3a264189087b99ad4?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1">正则表达式匹配（困难）</a></h2><h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><p>请实现一个函数用来匹配包括’ . ‘和’ * ‘的正则表达式。模式中的字符’ . ‘表示任意一个字符，而’ * ‘表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串”aaa”与模式”a.a”和”ab * ac * a”匹配，但是与”aa.a”和”ab*a”均不匹配</p>
+<h3 id="示例1-1"><a href="#示例1-1" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smalltalk"><span class="hljs-comment">&quot;aaa&quot;</span>,<span class="hljs-comment">&quot;a*a&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs julia"><span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">match</span><span class="hljs-params">(string s, string p)</span> </span>&#123;<br>        <span class="hljs-comment">// write code here</span><br>        <span class="hljs-keyword">int</span> m = s.<span class="hljs-built_in">size</span>();<br>		<span class="hljs-keyword">int</span> n = p.<span class="hljs-built_in">size</span>();<br>		vector&lt;vector&lt;<span class="hljs-keyword">bool</span>&gt;&gt;<span class="hljs-built_in">dp</span>(m + <span class="hljs-number">1</span>, vector&lt;<span class="hljs-keyword">bool</span>&gt;(n + <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>));<br>		dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">2</span>; j &lt;= n; j = j + <span class="hljs-number">2</span>) &#123;<br>			dp[<span class="hljs-number">0</span>][j] = dp[<span class="hljs-number">0</span>][j - <span class="hljs-number">2</span>] &amp;&amp; p[j - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span>;<br>		&#125;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>				dp[i][j] = p[j - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;*&#x27;</span> ?<br>					dp[i][j - <span class="hljs-number">2</span>] || dp[i - <span class="hljs-number">1</span>][j] &amp;&amp; (p[j - <span class="hljs-number">2</span>] == <span class="hljs-string">&#x27;.&#x27;</span> || s[i - <span class="hljs-number">1</span>] == p[j - <span class="hljs-number">2</span>]) :<br>					dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] &amp;&amp; (p[j - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;.&#x27;</span> || s[i - <span class="hljs-number">1</span>] == p[j - <span class="hljs-number">1</span>]);<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> dp[m][n];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析：</p>
+</blockquote>
+<p><strong>动态规划解析：</strong></p>
+<ul>
+<li><p><strong>状态定义</strong>： 设动态规划矩阵 <code>dp</code> ， <code>dp[i][j]</code> 代表字符串 <code>s</code> 的前 <code>i</code> 个字符和 <code>p</code> 的前 <code>j</code> 个字符能否匹配。</p>
+</li>
+<li><p><strong>转移方程</strong>： 需要注意，由于 <code>dp[0][0]</code> 代表的是空字符的状态， 因此 <code>dp[i][j]</code> 对应的添加字符是 <code>s[i - 1]</code> 和 <code>p[j - 1]</code> 。</p>
+<ul>
+<li><p>当 <code>p[j - 1] = &#39;*&#39;</code> 时， <code>dp[i][j]</code> 在当以下任一情况为 $true$ 时等于 $true$ ：</p>
+<ol>
+<li><p><code>dp[i][j - 2]</code>： 即将字符组合 <code>p[j - 2] *</code> 看作出现 0 次时，能否匹配；</p>
+</li>
+<li><p><code>dp[i - 1][j]</code> 且 <code>s[i - 1] = p[j - 2]</code>: 即让字符 <code>p[j - 2]</code> 多出现 1 次时，能否匹配；</p>
+</li>
+<li><p><code>dp[i - 1][j]</code> 且 <code>p[j - 2] = &#39;.&#39;</code>: 即让字符 <code>&#39;.&#39;</code> 多出现 1 次时，能否匹配；</p>
+</li>
+</ol>
+</li>
+<li><p>当 <code>p[j - 1] != &#39;*&#39;</code> 时， <code>dp[i][j]</code> 在当以下任一情况为 $true$ 时等于 $true$ ：</p>
+<ol>
+<li><p><code>dp[i - 1][j - 1]</code> 且 <code>s[i - 1] = p[j - 1]</code>： 即让字符 <code>p[j - 1]</code> 多出现一次时，能否匹配；</p>
+</li>
+<li><p><code>dp[i - 1][j - 1]</code> 且 <code>p[j - 1] = &#39;.&#39;</code>： 即将字符 . 看作字符 <code>s[i - 1]</code> 时，能否匹配；</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>初始化</strong>： 需要先初始化 <code>dp</code> 矩阵首行，以避免状态转移时索引越界。</p>
+<ul>
+<li><p><code>dp[0][0] = true</code>： 代表两个空字符串能够匹配。</p>
+</li>
+<li><p><code>dp[0][j] = dp[0][j - 2]</code> 且 <code>p[j - 1] = &#39;*&#39;</code>： 首行 <code>s</code> 为空字符串，因此当 <code>p</code> 的偶数位为 <code>*</code> 时才能够匹配（即让 p 的奇数位出现 0 次，保持 <code>p</code> 是空字符串）。因此，循环遍历字符串 <code>p</code> ，步长为 2（即只看偶数位）。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>： <code>dp</code> 矩阵右下角字符，代表字符串 <code>s</code> 和 <code>p</code> 能否匹配。</p>
+</li>
+</ul>
+<p>参考：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/solution/jian-zhi-offer-19-zheng-ze-biao-da-shi-pi-pei-dong/">剑指 Offer 19. 正则表达式匹配（动态规划，清晰图解） - 正则表达式匹配 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<h2 id="五十三、表示数值的字符串"><a href="#五十三、表示数值的字符串" class="headerlink" title="五十三、表示数值的字符串"></a>五十三、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/e69148f8528c4039ad89bb2546fd4ff8?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1">表示数值的字符串</a></h2><h3 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h3><p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。</p>
+<h3 id="示例1-2"><a href="#示例1-2" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-string">&quot;123.45e+6&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs julia"><span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><p>输入：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-string">&quot;1.2.3&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs julia"><span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isNumeric</span><span class="hljs-params">(string str)</span> </span>&#123;<br>        <span class="hljs-comment">// write code here</span><br>        vector&lt;map&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;&gt;<span class="hljs-built_in">states</span>(<span class="hljs-number">9</span>);<br>		states[<span class="hljs-number">0</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-number">0</span>));<br>		states[<span class="hljs-number">0</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;s&#x27;</span>, <span class="hljs-number">1</span>));<br>		states[<span class="hljs-number">0</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">2</span>));<br>		states[<span class="hljs-number">0</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;.&#x27;</span>, <span class="hljs-number">4</span>));<br>		states[<span class="hljs-number">1</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">2</span>));<br>		states[<span class="hljs-number">1</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;.&#x27;</span>, <span class="hljs-number">4</span>));<br>		states[<span class="hljs-number">2</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">2</span>));<br>		states[<span class="hljs-number">2</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;.&#x27;</span>, <span class="hljs-number">3</span>));<br>		states[<span class="hljs-number">2</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-number">5</span>));<br>		states[<span class="hljs-number">2</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-number">8</span>));<br>		states[<span class="hljs-number">3</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">3</span>));<br>		states[<span class="hljs-number">3</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-number">5</span>));<br>		states[<span class="hljs-number">3</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-number">8</span>));<br>		states[<span class="hljs-number">4</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">3</span>));<br>		states[<span class="hljs-number">5</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;s&#x27;</span>, <span class="hljs-number">6</span>));<br>		states[<span class="hljs-number">5</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">7</span>));<br>		states[<span class="hljs-number">6</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">7</span>));<br>		states[<span class="hljs-number">7</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-number">7</span>));<br>		states[<span class="hljs-number">7</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-number">8</span>));<br>		states[<span class="hljs-number">8</span>].<span class="hljs-built_in">insert</span>(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-number">8</span>));<br><br>		<span class="hljs-keyword">int</span> p = <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">char</span> t;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : str) &#123;<br>			<span class="hljs-keyword">if</span> (c &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="hljs-string">&#x27;9&#x27;</span>)t = <span class="hljs-string">&#x27;d&#x27;</span>;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;+&#x27;</span> || c == <span class="hljs-string">&#x27;-&#x27;</span>)t = <span class="hljs-string">&#x27;s&#x27;</span>;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;e&#x27;</span> || c == <span class="hljs-string">&#x27;E&#x27;</span>)t = <span class="hljs-string">&#x27;e&#x27;</span>;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;.&#x27;</span> || c == <span class="hljs-string">&#x27; &#x27;</span>)t = c;<br>			<span class="hljs-keyword">else</span> t = <span class="hljs-string">&#x27;?&#x27;</span>;<br>			<span class="hljs-keyword">if</span> (!states[p].<span class="hljs-built_in">count</span>(t))<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>			p = states[p][t];<br>		&#125;<br>		<span class="hljs-keyword">return</span> p == <span class="hljs-number">2</span> || p == <span class="hljs-number">3</span> || p == <span class="hljs-number">7</span> || p == <span class="hljs-number">8</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析：</p>
+</blockquote>
+<p><strong>有限状态自动机</strong></p>
+<p><strong>状态定义：</strong></p>
+<p>按照字符串从左到右的顺序，定义以下 9 种状态。</p>
+<ol>
+<li><p>开始的空格</p>
+</li>
+<li><p>幂符号前的正负号</p>
+</li>
+<li><p>小数点前的数字</p>
+</li>
+<li><p>小数点、小数点后的数字</p>
+</li>
+<li><p>当小数点前为空格时，小数点、小数点后的数字</p>
+</li>
+<li><p>幂符号</p>
+</li>
+<li><p>幂符号后的正负号</p>
+</li>
+<li><p>幂符号后的数字</p>
+</li>
+<li><p>结尾的空格</p>
+</li>
+</ol>
+<p><strong>结束状态：</strong></p>
+<p>合法的结束状态有 2, 3, 7, 8 。</p>
+<p><img src="/2021/06/25/%E5%89%91%E6%8C%87offer51-55/6f41d7e46fd0344c013980e3f46429dd7a7311bb4292783a482466a90f15747b-Picture1.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li><p><strong>初始化</strong>：</p>
+<ol>
+<li>状态转移表 $states$ ： 设 $states[i]$ ，其中 $i$ 为所处状态， $states[i]$ 使用哈希表存储可转移至的状态。键值对 $(key, value)$ 含义：若输入 $key$ ，则可从状态 $i$ 转移至状态 $value$ 。</li>
+<li>当前状态 $p$ ： 起始状态初始化为 $p = 0$ 。</li>
+</ol>
+</li>
+<li><p><strong>状态转移循环</strong>： 遍历字符串 $s$ 的每个字符 $c$ 。</p>
+<ol>
+<li><p>记录字符类型 $t$ ： 分为四种情况。</p>
+<ul>
+<li><p>当 $c$ 为正负号时，执行 <code>t = &#39;s&#39;</code> ;</p>
+</li>
+<li><p>当 $c$ 为数字时，执行 <code>t = &#39;d&#39;</code> ;</p>
+</li>
+<li><p>当 $c$ 为 <code>e , E</code> 时，执行 <code>t = &#39;e&#39; </code>;</p>
+</li>
+<li><p>当 $c$ 为 <code>.</code> , <code>空格</code> 时，执行 <code>t = c</code> （即用字符本身表示字符类型）;</p>
+</li>
+<li><p>否则，执行 <code>t = &#39;?&#39;</code> ，代表为不属于判断范围的非法字符，后续直接返回 $ false $ 。</p>
+</li>
+</ul>
+</li>
+<li><p>终止条件： 若字符类型 $t$ 不在哈希表 $states[p]$ 中，说明无法转移至下一状态，因此直接返回 $ false$ 。</p>
+</li>
+<li><p>状态转移： 状态 $p$ 转移至 $ states[p][t] $ 。</p>
+</li>
+</ol>
+</li>
+<li><p><strong>返回值</strong>： 跳出循环后，若状态 $p \in {2, 3, 7, 8}$，说明结尾合法，返回 $ true $ ，否则返回 $ false $ 。</p>
+</li>
+</ol>
+<p><strong>另一种方法：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isNumeric</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* string)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">bool</span> sign = <span class="hljs-literal">false</span>, decimal = <span class="hljs-literal">false</span>,hasE = <span class="hljs-literal">false</span>;<span class="hljs-comment">//正负号 小数点 e</span><br>    <span class="hljs-keyword">int</span> len = <span class="hljs-built_in">strlen</span>(string);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i)&#123;<br>        <span class="hljs-keyword">if</span>(string[i] == <span class="hljs-string">&#x27;e&#x27;</span> || string[i] == <span class="hljs-string">&#x27;E&#x27;</span>)&#123;<br>            <span class="hljs-keyword">if</span>( i == len - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<span class="hljs-comment">//e 的后面必须要出现数字 对应 12e</span><br>            <span class="hljs-keyword">if</span>(hasE) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<span class="hljs-comment">//只能有一个e</span><br>            hasE = <span class="hljs-literal">true</span>;<br><br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(string[i] == <span class="hljs-string">&#x27;+&#x27;</span> || string[i] == <span class="hljs-string">&#x27;-&#x27;</span>)&#123;                <br>            <span class="hljs-keyword">if</span>(!sign &amp;&amp; i&gt;<span class="hljs-number">0</span> &amp;&amp; string[i<span class="hljs-number">-1</span>] !=<span class="hljs-string">&#x27;e&#x27;</span> &amp;&amp; string[i<span class="hljs-number">-1</span>] != <span class="hljs-string">&#x27;E&#x27;</span>)<span class="hljs-comment">// 12e+5 如果第一次出现，且不是在开头，那么也要紧跟在e/E之后</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">if</span>(sign &amp;&amp; string[i<span class="hljs-number">-1</span>] !=<span class="hljs-string">&#x27;e&#x27;</span> &amp;&amp; string[i<span class="hljs-number">-1</span>] !=<span class="hljs-string">&#x27;E&#x27;</span>)<span class="hljs-comment">// +5e-6  第二次出现，那也要跟在 e/E之后</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            sign = <span class="hljs-literal">true</span>;<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(string[i] == <span class="hljs-string">&#x27;.&#x27;</span>)&#123;<br>            <span class="hljs-keyword">if</span>(decimal) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <br>            <span class="hljs-keyword">if</span>(hasE) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<span class="hljs-comment">// E后面不能跟小数点  12e+4.3</span><br><br>            decimal = <span class="hljs-literal">true</span>;<br><br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(string[i] &lt; <span class="hljs-string">&#x27;0&#x27;</span> || string[i] &gt; <span class="hljs-string">&#x27;9&#x27;</span>)<span class="hljs-comment">//不合法字符</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="五十四、字符流中第一个不重复的字符"><a href="#五十四、字符流中第一个不重复的字符" class="headerlink" title="五十四、字符流中第一个不重复的字符"></a>五十四、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/00de97733b8e4f97a3fb5c680ee10720?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1">字符流中第一个不重复的字符</a></h2><h3 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h3><p>请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符”go”时，第一个只出现一次的字符是”g”。当从该字符流中读出前六个字符“google”时，第一个只出现一次的字符是”l”。</p>
+<p>后台会用以下方式调用Insert 和 FirstAppearingOnce 函数</p>
+<blockquote>
+<p>string caseout = “”;</p>
+<p>1.读入测试用例字符串casein</p>
+<p>2.如果对应语言有Init()函数的话，执行Init() 函数</p>
+<p>3.循环遍历字符串里的每一个字符ch {</p>
+<p>Insert(ch);</p>
+<p>caseout += FirstAppearingOnce()</p>
+<p>}</p>
+<p>2.输出caseout，进行比较。</p>
+</blockquote>
+<p><strong>返回值描述：</strong></p>
+<p>如果当前字符流没有存在出现一次的字符，返回#字符。</p>
+<h3 id="示例1-3"><a href="#示例1-3" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-string">&quot;google&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-string">&quot;ggg<span class="hljs-subst">#ll</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    vector&lt;<span class="hljs-keyword">char</span>&gt; vec;<br>    unordered_map&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; res;<br>  <span class="hljs-comment">//Insert one char from stringstream</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Insert</span><span class="hljs-params">(<span class="hljs-keyword">char</span> ch)</span> </span>&#123;<br>        vec.<span class="hljs-built_in">push_back</span>(ch);<br>        res[ch]++;<br>    &#125;<br>  <span class="hljs-comment">//return the first appearence once char in current stringstream</span><br>    <span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">FirstAppearingOnce</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> ch : vec) &#123;<br>            <span class="hljs-keyword">if</span>(res[ch] == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> ch;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;#&#x27;</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析：</p>
+</blockquote>
+<p>vector 读取字符流中的字符</p>
+<p>map 存每个字符出现的次数</p>
+<p>遍历 vector ，判断当字符次数为 1 时，返回当前字符</p>
+<p>若遍历结束还没有符合的字符，返回 #</p>
+<h2 id="五十五、链表中环的入口结点"><a href="#五十五、链表中环的入口结点" class="headerlink" title="五十五、链表中环的入口结点"></a>五十五、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1">链表中环的入口结点</a></h2><h3 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h3><p>给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，返回null。</p>
+<p><strong>输入描述</strong>：</p>
+<p>输入分为2段，第一段是入环前的链表部分，第二段是链表环的部分，后台将这2个会组装成一个有环或者无环单链表</p>
+<p><strong>返回值描述</strong>：</p>
+<p>返回链表的环的入口结点即可。而我们后台程序会打印这个节点</p>
+<h3 id="示例1-4"><a href="#示例1-4" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="hljs-template-variable">&#123;1,2&#125;</span><span class="xml">,</span><span class="hljs-template-variable">&#123;3,4,5&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">3<br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">返回环形链表入口节点，我们后台会打印该环形链表入口节点，即3    <br></code></pre></td></tr></table></figure>
+
+<h3 id="示例2-1"><a href="#示例2-1" class="headerlink" title="示例2"></a>示例2</h3><p>输入：</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="hljs-template-variable">&#123;1&#125;</span><span class="xml">,</span><span class="hljs-template-variable">&#123;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-string">&quot;null&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">没有环，返回<span class="hljs-keyword">null</span>，后台打印<span class="hljs-string">&quot;null&quot;</span> <br></code></pre></td></tr></table></figure>
+
+<h3 id="示例3"><a href="#示例3" class="headerlink" title="示例3"></a>示例3</h3><p>输入：</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="hljs-template-variable">&#123;&#125;</span><span class="xml">,</span><span class="hljs-template-variable">&#123;2&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">2<br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">只有环形链表节点2，返回节点2，后台打印2   <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment">struct ListNode &#123;</span><br><span class="hljs-comment">    int val;</span><br><span class="hljs-comment">    struct ListNode *next;</span><br><span class="hljs-comment">    ListNode(int x) :</span><br><span class="hljs-comment">        val(x), next(NULL) &#123;</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">&#125;;</span><br><span class="hljs-comment">*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">EntryNodeOfLoop</span><span class="hljs-params">(ListNode* pHead)</span> </span>&#123;<br>        unordered_map&lt;ListNode*, <span class="hljs-keyword">int</span>&gt;m;<br>        <span class="hljs-keyword">while</span>(pHead != <span class="hljs-literal">nullptr</span>) &#123;<br>            m[pHead]++;<br>            <span class="hljs-keyword">if</span>(m[pHead] == <span class="hljs-number">2</span>)<span class="hljs-keyword">return</span> pHead;<br>            pHead = pHead-&gt;next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析：</p>
+</blockquote>
+<p><strong>方法一：哈希表</strong></p>
+<p>通过map函数判断是否存在环路，此时将value值设置为出现的次数</p>
+<p><strong>方法二：快慢指针</strong></p>
+<p>两个指针一个fast、一个slow同时从一个链表的头部出发 fast一次走2步，slow一次走一步，如果该链表有环，两个指针必然在环内相遇 此时只需要把其中的一个指针重新指向链表头部，另一个不变（还在环内）， 这次两个指针一次走一步，相遇的地方就是入口节点。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment">struct ListNode &#123;</span><br><span class="hljs-comment">    int val;</span><br><span class="hljs-comment">    struct ListNode *next;</span><br><span class="hljs-comment">    ListNode(int x) :</span><br><span class="hljs-comment">        val(x), next(NULL) &#123;</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">&#125;;</span><br><span class="hljs-comment">*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">EntryNodeOfLoop</span><span class="hljs-params">(ListNode* pHead)</span> </span>&#123;<br>        ListNode*fast = pHead,*low = pHead;<br>        <span class="hljs-keyword">while</span>(fast &amp;&amp; fast-&gt;next)&#123;<br>            fast = fast-&gt;next-&gt;next;<br>            low = low-&gt;next;<br>            <span class="hljs-keyword">if</span> (fast == low)<br>                <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(!fast || !fast-&gt;next)<span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        low = pHead;<span class="hljs-comment">//low从链表头出发</span><br>        <span class="hljs-keyword">while</span>(fast != low) &#123;<span class="hljs-comment">//fast从相遇点出发</span><br>            fast = fast-&gt;next;<br>            low = low-&gt;next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> low;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>算法流程：</strong></p>
+<ol>
+<li><p>双指针第一次相遇： 设两指针 fast，slow 指向链表头部 head，fast 每轮走 2 步，slow 每轮走 1 步；</p>
+<ol>
+<li><p>第一种结果： fast 指针走过链表末端，说明链表无环，直接返回 null；</p>
+<ul>
+<li>TIPS: 若有环，两指针一定会相遇。因为每走 1 轮，fast 与 slow 的间距 +1，fast 终会追上 slow；</li>
+</ul>
+</li>
+<li><p>第二种结果： 当fast == slow时， 两指针在环中 第一次相遇 。下面分析此时fast 与 slow走过的 步数关系 ：</p>
+<ul>
+<li><p>设链表共有 a+b 个节点，其中 链表头部到链表入口 有 a 个节点（不计链表入口节点）， 链表环 有 b 个节点（这里需要注意，a 和 b 是未知数）；设两指针分别走了 f，s 步，则有：</p>
+</li>
+<li><p>fast 走的步数是slow步数的 2 倍，即 f=2s；（解析： fast 每轮走 2 步）</p>
+</li>
+<li><p>fast 比 slow多走了 n 个环的长度，即 f=s+nb；（ 解析： 双指针都走过 a 步，然后在环内绕圈直到重合，重合时 fast 比 slow 多走 环的长度整数倍 ）；</p>
+</li>
+<li><p>以上两式相减得：f=2nb，s=nb，即 fast和slow 指针分别走了 2n，n 个 环的周长 （注意： n 是未知数，不同链表的情况不同）。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>目前情况分析：</p>
+<ul>
+<li>如果让指针从链表头部一直向前走并统计步数k，那么所有 走到链表入口节点时的步数 是：k=a+nb（先走 a 步到入口节点，之后每绕 1 圈环（ b 步）都会再次到入口节点）。</li>
+<li>而目前，slow 指针走过的步数为 nb 步。因此，我们只要想办法让 slow 再走 a 步停下来，就可以到环的入口。</li>
+<li>但是我们不知道 a 的值，该怎么办？依然是使用双指针法。我们构建一个指针，此指针需要有以下性质：此指针和slow 一起向前走 a 步后，两者在入口节点重合。那么从哪里走到入口节点需要 a 步？答案是链表头部head。</li>
+</ul>
+</li>
+<li><p>双指针第二次相遇：</p>
+<ul>
+<li><p>slow指针 位置不变 ，将fast指针重新 指向链表头部节点 ；slow和fast同时每轮向前走 1 步；</p>
+<ul>
+<li>TIPS：此时 f=0，s=nb ；</li>
+</ul>
+</li>
+<li><p>当 fast 指针走到 f=a 步时，slow 指针走到步 s=a+nb，此时 两指针重合，并同时指向链表环入口 。</p>
+</li>
+</ul>
+</li>
+<li><p>返回slow指针指向的节点。</p>
+</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AC%94%E8%AF%95%E7%BB%83%E4%B9%A0/">笔试练习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/03/%E9%9D%A2%E7%BB%8F1%E7%BC%96%E8%AF%91%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">编译内存相关</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/24/%E5%89%91%E6%8C%87offer46-50/">
+                        <span class="hidden-mobile">剑指offer 46-50</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.lazyComments('valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "0g4dRYg6zRKUQ8ihzcTkjKbt-MdYXbMMI",
+          app_key: "iINw7nnmlKgqvC59j21ncCC8",
+          placeholder: "Just go go",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?64da8717546fc94735e3e2f05cfc89cb";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avator.jpg">
+  <link rel="icon" href="/img/avator.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="pakchoi">
+  <meta name="keywords" content="">
+  
+  <title>剑指offer 21-25 - pakchoi&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"pakchoi007.gitee.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"64da8717546fc94735e3e2f05cfc89cb","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="pakchoi's blogs" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>pakchoi</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/wenzhang.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="剑指offer 21-25">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      pakchoi
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-15 12:32" pubdate>
+        2021年6月15日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">剑指offer 21-25</h1>
+            
+            <div class="markdown-body">
+              <h1 id="剑指offer-21-25"><a href="#剑指offer-21-25" class="headerlink" title="剑指offer    21~25"></a>剑指offer    21~25</h1><h2 id="二十一、栈的压入、弹出序列"><a href="#二十一、栈的压入、弹出序列" class="headerlink" title="二十一、栈的压入、弹出序列"></a>二十一、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/d77d11405cc7470d82554cb392585106?tpId=13&&tqId=11174&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking">栈的压入、弹出序列</a></h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4,5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
+<h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">[<span class="hljs-number">1,2,3,4</span>,<span class="hljs-number">5</span>],[<span class="hljs-number">4,3,5,1</span>,<span class="hljs-number">2</span>]<br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs julia"><span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">IsPopOrder</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt; pushV,vector&lt;<span class="hljs-keyword">int</span>&gt; popV)</span> </span>&#123;<br>        stack&lt;<span class="hljs-keyword">int</span>&gt; st;<br>        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> num : pushV) &#123;<br>            st.<span class="hljs-built_in">push</span>(num);<br>            <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; st.<span class="hljs-built_in">top</span>() == popV[i]) &#123;<br>                st.<span class="hljs-built_in">pop</span>();<br>                i++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> st.<span class="hljs-built_in">empty</span>();<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析：</p>
+</blockquote>
+<p>借助一个辅助栈</p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li><p>初始化： 辅助栈 stack ，弹出序列的索引 $i$ ；</p>
+</li>
+<li><p>遍历压栈序列： 各元素记为 $num$ ；</p>
+<ol>
+<li><p>元素 $num$ 入栈；</p>
+</li>
+<li><p>循环出栈：若 stack 的栈顶元素 == 弹出序列元素 $popV[i]$ ，则执行出栈与 $i++$ ；</p>
+</li>
+</ol>
+</li>
+<li><p>返回值： 若 stack 为空，则此弹出序列合法。</p>
+</li>
+</ol>
+<h2 id="二十二、从上往下打印二叉树"><a href="#二十二、从上往下打印二叉树" class="headerlink" title="二十二、从上往下打印二叉树"></a>二十二、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1">从上往下打印二叉树</a></h2><h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<h3 id="示例1-1"><a href="#示例1-1" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">&#123;<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,#,<span class="hljs-number">3</span>,#,<span class="hljs-number">2</span>,#,<span class="hljs-number">1</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">[<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment">struct TreeNode &#123;</span><br><span class="hljs-comment">	int val;</span><br><span class="hljs-comment">	struct TreeNode *left;</span><br><span class="hljs-comment">	struct TreeNode *right;</span><br><span class="hljs-comment">	TreeNode(int x) :</span><br><span class="hljs-comment">			val(x), left(NULL), right(NULL) &#123;</span><br><span class="hljs-comment">	&#125;</span><br><span class="hljs-comment">&#125;;*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">PrintFromTopToBottom</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> vector&lt;<span class="hljs-keyword">int</span>&gt;();<br>        queue&lt;TreeNode*&gt;q;<br>        q.<span class="hljs-built_in">push</span>(root);<br>        TreeNode *node = <span class="hljs-literal">nullptr</span>;<br>        vector&lt;<span class="hljs-keyword">int</span>&gt; result;<br>        <span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>()) &#123;<br>            node = q.<span class="hljs-built_in">front</span>();<br>            q.<span class="hljs-built_in">pop</span>();<br>            result.<span class="hljs-built_in">push_back</span>(node-&gt;val);<br>            <span class="hljs-keyword">if</span>(node-&gt;left) q.<span class="hljs-built_in">push</span>(node-&gt;left);<br>            <span class="hljs-keyword">if</span>(node-&gt;right) q.<span class="hljs-built_in">push</span>(node-&gt;right);<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>算法流程：</strong></p>
+<ol>
+<li>特例处理： 当树的根节点为空，则直接返回空列表 [] ；</li>
+<li>初始化： 打印结果列表 res = [] ，包含根节点的队列 queue = [root] ；</li>
+<li>BFS 循环： 当队列 queue 为空时跳出；<ol>
+<li>出队： 队首元素出队，记为 node；</li>
+<li>打印： 将 node.val 添加至列表 res 尾部；</li>
+<li>添加子节点： 若 node 的左（右）子节点不为空，则将左（右）子节点加入队列 queue ；</li>
+</ol>
+</li>
+<li>返回值： 返回打印结果列表 res 即可。</li>
+</ol>
+<h2 id="☆☆二十三、二叉搜索树的后序遍历序列"><a href="#☆☆二十三、二叉搜索树的后序遍历序列" class="headerlink" title="☆☆二十三、二叉搜索树的后序遍历序列"></a>☆☆二十三、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1">二叉搜索树的后序遍历序列</a></h2><h3 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h3><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则返回true,否则返回false。假设输入的数组的任意两个数字都互不相同。（ps：我们约定空树不是二叉搜素树）</p>
+<h3 id="示例1-2"><a href="#示例1-2" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">[<span class="hljs-number">4</span>,<span class="hljs-number">8</span>,<span class="hljs-number">6</span>,<span class="hljs-number">12</span>,<span class="hljs-number">16</span>,<span class="hljs-number">14</span>,<span class="hljs-number">10</span>]<br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs julia"><span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">recur</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; sequence, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(start &gt; end) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">int</span> root = sequence[end];	<span class="hljs-comment">//根节点</span><br>        <span class="hljs-keyword">int</span> pos = start;<br>        <span class="hljs-keyword">for</span> (; pos &lt; end; pos++) &#123;<br>            <span class="hljs-comment">//右子树全部大于根节点，找到第一个大于根节点的元素，那么在他之前都是左子树，之后都是右子树</span><br>            <span class="hljs-keyword">if</span>(sequence[pos] &gt; root) <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = pos; j &lt; end; j++) &#123;<br>            <span class="hljs-keyword">if</span>(sequence[j] &lt; root) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<span class="hljs-comment">//右子树必须全部大于根，否则返回false</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">recur</span>(sequence, start, pos - <span class="hljs-number">1</span>) <span class="hljs-comment">//判断左子树</span><br>            &amp;&amp; <span class="hljs-built_in">recur</span>(sequence, pos, end - <span class="hljs-number">1</span>);	<span class="hljs-comment">//判断右子树</span><br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">VerifySquenceOfBST</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt; sequence)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(sequence.<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">recur</span>(sequence, <span class="hljs-number">0</span>, sequence.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析：</p>
+</blockquote>
+<p><strong>递归解析：</strong></p>
+<ul>
+<li><p>终止条件： 当 $start \geq end$ ，说明此子树节点数量 $\leq 1$ ，无需判别正确性，因此直接返回 $true$ ；</p>
+</li>
+<li><p>递推工作：</p>
+<ol>
+<li><p>划分左右子树： 遍历后序遍历的 $[start, end]$ 区间元素，寻找第一个大于根节点的节点，索引记为 $pos$ 。此时，可划分出左子树区间 $[start,pos-1]$ 、右子树区间 $[pos, end - 1]$ 、根节点索引 $end$ 。</p>
+</li>
+<li><p>判断是否为二叉搜索树：</p>
+<ul>
+<li><p>左子树区间 $[start, pos - 1]$ 内的所有节点都应 $&lt;sequence[end]$ 。而第 <code>1.划分左右子树</code> 步骤已经保证左子树区间的正确性，因此只需要判断右子树区间即可。</p>
+</li>
+<li><p>右子树区间 $[pos, end-1]$ 内的所有节点都应 $&gt; sequence[end]$ 。实现方式为遍历，当遇到 $\leq sequence[end]$ 的节点则返回 $false$ 。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>返回值： 所有子树都需正确才可判定正确，因此使用 与逻辑符 &amp;&amp; 连接。</p>
+<ol>
+<li>$recur(start, pos - 1)$ ： 判断 此树的左子树是否正确。</li>
+<li>$recur(pos, end - 1)$ ： 判断 此树的右子树是否正确。</li>
+</ol>
+</li>
+</ul>
+<h2 id="二十四、二叉树中和为某一值的路径"><a href="#二十四、二叉树中和为某一值的路径" class="headerlink" title="二十四、二叉树中和为某一值的路径"></a>二十四、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/b736e784e3e34731af99065031301bca?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1">二叉树中和为某一值的路径</a></h2><h2 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h2><p>输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
+<h3 id="示例1-3"><a href="#示例1-3" class="headerlink" title="示例1"></a>示例1</h3><p>输入：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">&#123;<span class="hljs-number">10,5,12,4</span>,<span class="hljs-number">7</span>&#125;,<span class="hljs-number">22</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">[[<span class="hljs-number">10</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>],[<span class="hljs-number">10</span>,<span class="hljs-number">12</span>]]<br></code></pre></td></tr></table></figure>
+
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><p>输入：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">&#123;<span class="hljs-number">10,5,12,4</span>,<span class="hljs-number">7</span>&#125;,<span class="hljs-number">15</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">[]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment">struct TreeNode &#123;</span><br><span class="hljs-comment">	int val;</span><br><span class="hljs-comment">	struct TreeNode *left;</span><br><span class="hljs-comment">	struct TreeNode *right;</span><br><span class="hljs-comment">	TreeNode(int x) :</span><br><span class="hljs-comment">			val(x), left(NULL), right(NULL) &#123;</span><br><span class="hljs-comment">	&#125;</span><br><span class="hljs-comment">&#125;;*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    vector&lt;<span class="hljs-keyword">int</span>&gt;path;<br>    vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;ret;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">backtracking</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span>;<br>        path.<span class="hljs-built_in">push_back</span>(root-&gt;val);<br>        target -= root-&gt;val;<br>        <span class="hljs-keyword">if</span>(target == <span class="hljs-number">0</span> &amp;&amp; root-&gt;left == <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="hljs-literal">nullptr</span>) &#123;<br>            ret.<span class="hljs-built_in">push_back</span>(path);<br>        &#125;<br>        <span class="hljs-built_in">backtracking</span>(root-&gt;left, target);<br>        <span class="hljs-built_in">backtracking</span>(root-&gt;right, target);<br>        path.<span class="hljs-built_in">pop_back</span>();<br>    &#125;<br>    vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt; &gt; <span class="hljs-built_in">FindPath</span>(TreeNode* root,<span class="hljs-keyword">int</span> expectNumber) &#123;<br>        path.<span class="hljs-built_in">clear</span>();<br>        ret.<span class="hljs-built_in">clear</span>();<br>        <span class="hljs-built_in">backtracking</span>(root, expectNumber);<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析:</p>
+</blockquote>
+<p><strong>算法流程：</strong></p>
+<p><strong>$FindPath(root, expectNumber)$ 函数：</strong></p>
+<ul>
+<li><p>初始化： 结果列表 $ret$ ，路径列表 $path$ 。</p>
+</li>
+<li><p>返回值： 返回 $ret$ 即可。</p>
+</li>
+</ul>
+<p><strong>$backtracking(root, target)$ 函数：</strong></p>
+<ul>
+<li>递推参数： 当前节点 $root$ ，当前目标值 $target$ 。</li>
+<li>终止条件： 若节点 $root$ 为空，则直接返回。</li>
+<li>递推工作：<ol>
+<li>路径更新： 将当前节点值 $root.val$ 加入路径 $path$ ；</li>
+<li>目标值更新： $target = target - root.val$（即目标值 $target$ 从 $expectNumber$ 减至 0 ）；</li>
+<li>路径记录： 当 ① $root$ 为叶节点 <strong>且</strong> ② 路径和等于目标值 ，则将此路径 $path$ 加入 $ret$ 。</li>
+<li>先序遍历： 递归左 / 右子节点。</li>
+<li>路径恢复： 向上回溯前，需要将当前节点从路径 $path$ 中删除，即执行 path.pop_back() 。</li>
+</ol>
+</li>
+</ul>
+<h2 id="二十五、复杂链表的复制"><a href="#二十五、复杂链表的复制" class="headerlink" title="二十五、复杂链表的复制"></a>二十五、<a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1">复杂链表的复制</a></h2><h3 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h3><p>输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针random指向一个随机节点），请对此链表进行深拷贝，并返回拷贝后的头结点。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><p><img src="/2021/06/15/%E5%89%91%E6%8C%87offer21-25/e1.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>输入：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">head = <span class="hljs-comment">[<span class="hljs-comment">[7,null]</span>,<span class="hljs-comment">[13,0]</span>,<span class="hljs-comment">[11,4]</span>,<span class="hljs-comment">[10,2]</span>,<span class="hljs-comment">[1,0]</span>]</span><br></code></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">[[<span class="hljs-number">7</span>,<span class="hljs-literal">null</span>],[<span class="hljs-number">13</span>,<span class="hljs-number">0</span>],[<span class="hljs-number">11</span>,<span class="hljs-number">4</span>],[<span class="hljs-number">10</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment">struct RandomListNode &#123;</span><br><span class="hljs-comment">    int label;</span><br><span class="hljs-comment">    struct RandomListNode *next, *random;</span><br><span class="hljs-comment">    RandomListNode(int x) :</span><br><span class="hljs-comment">            label(x), next(NULL), random(NULL) &#123;</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">&#125;;</span><br><span class="hljs-comment">*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">RandomListNode* <span class="hljs-title">Clone</span><span class="hljs-params">(RandomListNode* pHead)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (pHead == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        RandomListNode* node = pHead;<br>        <span class="hljs-keyword">while</span> (node != <span class="hljs-literal">nullptr</span>) &#123;<br>            RandomListNode* clonenode = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RandomListNode</span>(node-&gt;label);<br>            clonenode-&gt;next = node-&gt;next;<br>            node-&gt;next = clonenode;<br>            node = clonenode-&gt;next;<br>        &#125;<br>        node = pHead;<br>        RandomListNode* clonehead = node-&gt;next;<br>        <span class="hljs-keyword">while</span> (node != <span class="hljs-literal">nullptr</span>) &#123;<br>            <span class="hljs-keyword">if</span>(node-&gt;random != <span class="hljs-literal">nullptr</span>) &#123;<br>                node-&gt;next-&gt;random = node-&gt;random-&gt;next;<br>            &#125;<br>            node = node-&gt;next-&gt;next;<br>        &#125;<br>        node = pHead;<br>        RandomListNode* clonenode = clonehead;<br>        <span class="hljs-keyword">while</span> (node != <span class="hljs-literal">nullptr</span>) &#123;<br>            node-&gt;next = node-&gt;next-&gt;next;<br>            node = node-&gt;next;<br>            <span class="hljs-keyword">if</span> (clonenode-&gt;next != <span class="hljs-literal">nullptr</span>) &#123;<br>                clonenode-&gt;next = clonenode-&gt;next-&gt;next;<br>                clonenode = clonenode-&gt;next;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> clonehead;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分析：</p>
+</blockquote>
+<p><strong>方法一：拼接 + 拆分</strong><br>考虑构建 <code>原节点 1 -&gt; 新节点 1 -&gt; 原节点 2 -&gt; 新节点 2 -&gt; ……</code> 的拼接链表，如此便可在访问原节点的 <code>random</code> 指向节点的同时找到新对应新节点的 <code>random</code> 指向节点。</p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li><p>复制各节点，构建拼接链表:</p>
+<ul>
+<li>设原链表为 $node1 \rightarrow node2 \rightarrow \cdots$ ，构建的拼接链表如下所示：<br>$<br>node1 \rightarrow node1_{clone} \rightarrow node2 \rightarrow node2_{clone} \rightarrow \cdots<br>$</li>
+</ul>
+</li>
+<li><p>构建新链表各节点的 <code>random</code> 指向：</p>
+<ul>
+<li>当访问原节点 <code>node</code> 的随机指向节点 <code>node.random</code> 时，对应新节点 <code>node.next</code> 的随机指向节点为 <code>node.random.next</code> 。</li>
+</ul>
+</li>
+<li><p>拆分原 / 新链表：</p>
+<ul>
+<li>设置 <code>node</code> / <code>clonenode</code> 分别指向原 / 新链表头节点，遍历执行 <code>node.next = node.next.next</code> 和 <code>clonenode.next = clonenode.next.next</code> 将两链表拆分开。</li>
+</ul>
+</li>
+<li><p>返回新链表的头节点 <code>clonehead</code> 即可。</p>
+</li>
+</ol>
+<p>需要三次遍历链表</p>
+<p><strong>方法二：哈希表</strong></p>
+<p>利用哈希表的查询特点，考虑构建 原链表节点 和 新链表对应节点 的键值对映射关系，再遍历构建新链表各节点的 next 和 random 引用指向即可。</p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li>若头节点 head 为空节点，直接返回 null ；</li>
+<li>初始化： 哈希表 dic ， 节点 cur 指向头节点；</li>
+<li>复制链表：<ol>
+<li>建立新节点，并向 dic 添加键值对 (原 cur 节点, 新 cur 节点） ；</li>
+<li>cur 遍历至原链表下一节点；</li>
+</ol>
+</li>
+<li>构建新链表的引用指向：<ol>
+<li>构建新节点的 next 和 random 引用指向；</li>
+<li>cur 遍历至原链表下一节点；</li>
+</ol>
+</li>
+<li>返回值： 新链表的头节点 dic[head] ；</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment">struct RandomListNode &#123;</span><br><span class="hljs-comment">    int label;</span><br><span class="hljs-comment">    struct RandomListNode *next, *random;</span><br><span class="hljs-comment">    RandomListNode(int x) :</span><br><span class="hljs-comment">            label(x), next(NULL), random(NULL) &#123;</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">&#125;;</span><br><span class="hljs-comment">*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">RandomListNode* <span class="hljs-title">Clone</span><span class="hljs-params">(RandomListNode* pHead)</span> </span>&#123;<br>        unordered_map&lt;RandomListNode*, RandomListNode*&gt;dic;<br>        <span class="hljs-keyword">if</span>(pHead == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        RandomListNode* cur = pHead;<br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">nullptr</span>) &#123;<br>            dic[cur] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RandomListNode</span>(cur-&gt;label);<br>            cur = cur-&gt;next;<br>        &#125;<br>        cur = pHead;<br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">nullptr</span>) &#123;<br>            dic[cur]-&gt;next = dic[cur-&gt;next];<br>            dic[cur]-&gt;random = dic[cur-&gt;random];<br>            cur = cur-&gt;next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dic[pHead];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AC%94%E8%AF%95%E7%BB%83%E4%B9%A0/">笔试练习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/15/c++11%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C++11 智能指针</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/12/%E5%89%91%E6%8C%87offer16-20/">
+                        <span class="hidden-mobile">剑指offer 16-20</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.lazyComments('valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "0g4dRYg6zRKUQ8ihzcTkjKbt-MdYXbMMI",
+          app_key: "iINw7nnmlKgqvC59j21ncCC8",
+          placeholder: "Just go go",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?64da8717546fc94735e3e2f05cfc89cb";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

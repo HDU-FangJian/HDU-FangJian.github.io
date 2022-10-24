@@ -1,0 +1,670 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avator.jpg">
+  <link rel="icon" href="/img/avator.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="pakchoi">
+  <meta name="keywords" content="">
+  
+  <title>C++11 左值引用、右值引用、移动语义、完美转发 - pakchoi&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"pakchoi007.gitee.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"64da8717546fc94735e3e2f05cfc89cb","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="pakchoi's blogs" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>pakchoi</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/wenzhang.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="C++11 左值引用、右值引用、移动语义、完美转发">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      pakchoi
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-03 16:09" pubdate>
+        2021年6月3日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">C++11 左值引用、右值引用、移动语义、完美转发</h1>
+            
+            <div class="markdown-body">
+              <h1 id="二、左值引用、右值引用、移动语义、完美转发"><a href="#二、左值引用、右值引用、移动语义、完美转发" class="headerlink" title="二、左值引用、右值引用、移动语义、完美转发"></a>二、左值引用、右值引用、移动语义、完美转发</h1><h2 id="左值右值"><a href="#左值右值" class="headerlink" title="左值右值"></a>左值右值</h2><p><code>左值</code>：可以放到等号左边，可以取地址并且有名字的东西</p>
+<p><code>右值</code>：不可以放到等号左边，不能取地址的没有名字的东西</p>
+<blockquote>
+<p>举例</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = b + c;<br></code></pre></td></tr></table></figure>
+
+<p>a是左值，a有变量名，也可以取地址，可以放到等号左边, 表达式 b + c 的返回值是右值，没有名字且不能取地址，&amp;(b+c)不能通过编译，而且也不能放到等号左边。</p>
+<p><code>左值</code>一般有：</p>
+<ul>
+<li>函数名和变量名</li>
+<li>返回左值引用的函数调用</li>
+<li>前置自增自减表达式 ++i、–i</li>
+<li>由赋值表达式或赋值运算符连接的表达式(a=b, a += b 等)</li>
+<li>解引用表达式 *p</li>
+<li>字符串字面值”abcd”</li>
+</ul>
+<h2 id="纯右值"><a href="#纯右值" class="headerlink" title="纯右值"></a>纯右值</h2><p>运算表达式产生的临时变量、不和对象关联的原始字面量、非引用返回的临时变量、lambda 表达式等都是<code>纯右值</code></p>
+<p><code>纯右值</code>指的是临时变量值、不跟对象关联的字面量值</p>
+<p><code>临时变量</code>指的是非引用返回的函数返回值、表达式等，例如函数int func()的返回值，表达式a+b；</p>
+<p><code>不跟对象关联的字面量值</code>，例如true，2，”C”等。</p>
+<blockquote>
+<p>举例</p>
+</blockquote>
+<ul>
+<li>除字符串字面值外的字面值</li>
+<li>返回非引用类型的函数调用</li>
+<li>后置自增自减表达式i++、i–</li>
+<li>算术表达式(a+b, a*b, a&amp;&amp;b, a==b 等)</li>
+<li>取地址表达式等(&amp;a)</li>
+</ul>
+<h2 id="将亡值"><a href="#将亡值" class="headerlink" title="将亡值"></a>将亡值</h2><p><code>将亡值</code>则是C++11新增的跟右值引用相关的表达式，这样表达式通常是<strong>将要被移动的对象（移为他用）</strong>，比如返回右值引用T&amp;&amp;的函数返回值、std::move的返回值，或者转换为T&amp;&amp;的类型转换函数的返回值。</p>
+<p><code>将亡值</code>可以理解为通过“盗取”其他变量内存空间的方式获取到的值。在确保其他变量不再被使用、或即将被销毁时，通过“盗取”的方式可以避免内存空间的释放和分配，能够延长变量值的生命期。</p>
+<h2 id="左值引用"><a href="#左值引用" class="headerlink" title="左值引用"></a>左值引用</h2><p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>;<br><span class="hljs-keyword">int</span> &amp;b = a; <span class="hljs-comment">// b 是左值引用</span><br>b = <span class="hljs-number">4</span>;<br><span class="hljs-keyword">int</span> &amp;c = <span class="hljs-number">10</span>; <span class="hljs-comment">// error，10 无法取地址，无法进行引用</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;d = <span class="hljs-number">10</span>; <span class="hljs-comment">// ok，因为是常引用，引用常量数字，这个常量数字会存储在内存中，可以取地址</span><br></code></pre></td></tr></table></figure>
+
+<p><code>常量左值引用</code>是个“万能”的引用类型。它可以接受非常量左值、常量左值、右值对其进行初始化。不过常量左值所引用的右值在它的“余生”中只能是只读的。相对地，非常量左值只能接受非常量左值对其进行初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;a = <span class="hljs-number">2</span>;       <span class="hljs-comment">// error, 左值引用绑定到右值，编译失败</span><br><br><span class="hljs-keyword">int</span> b = <span class="hljs-number">2</span>;        <span class="hljs-comment">// 非常量左值</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;c = b; <span class="hljs-comment">// 常量左值引用绑定到非常量左值，编译通过</span><br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> d = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 常量左值</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;e = c; <span class="hljs-comment">// 常量左值引用绑定到常量左值，编译通过</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;b = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 常量左值引用绑定到右值，编程通过</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结论</p>
+</blockquote>
+<p>对于左值引用，等号右边的值必须可以取地址，如果不能取地址，则会编译失败，或者可以使用const 引用形式，但这样就只能通过引用来读取输出，不能修改数组，因为是常量引用。</p>
+<h2 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h2><p>使用 <code>std::move</code> 函数强制把左值转换为右值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">4</span>;<br><span class="hljs-keyword">int</span> &amp;&amp;b = a; <span class="hljs-comment">// error, a 是左值</span><br><span class="hljs-keyword">int</span> &amp;&amp;c = std::<span class="hljs-built_in">move</span>(a); <span class="hljs-comment">// ok</span><br></code></pre></td></tr></table></figure>
+
+<p>右值引用不能初始化为左值</p>
+<p>和常量左值引用不同的是，右值引用还可以对右值进行修改。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;&amp; a = <span class="hljs-number">10</span>;<br>a = <span class="hljs-number">100</span>;<br>cout &lt;&lt; a &lt;&lt; endl;  <span class="hljs-comment">// a = 100</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/03/c++11%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC/%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="深拷贝、浅拷贝"><a href="#深拷贝、浅拷贝" class="headerlink" title="深拷贝、浅拷贝"></a>深拷贝、浅拷贝</h2><h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">A</span>(<span class="hljs-keyword">int</span> size) : <span class="hljs-built_in">size_</span>(size) &#123;<br>	data_ = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size];<br>	&#125;<br>	<span class="hljs-built_in">A</span>()&#123;&#125;<br>	<span class="hljs-built_in">A</span>(<span class="hljs-keyword">const</span> A&amp; a) &#123;<br>		size_ = a.size_;<br>		data_ = a.data_;<br>		cout &lt;&lt; <span class="hljs-string">&quot;copy &quot;</span> &lt;&lt; endl;<br>	&#125;<br>	~<span class="hljs-built_in">A</span>() &#123;<br>		<span class="hljs-keyword">delete</span>[] data_;<br>	&#125;<br>	<span class="hljs-keyword">int</span> *data_;<br>	<span class="hljs-keyword">int</span> size_;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-function">A <span class="hljs-title">a</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br>	A b = a;<br>	cout &lt;&lt; <span class="hljs-string">&quot;b &quot;</span> &lt;&lt; b.data_ &lt;&lt; endl;<br>	cout &lt;&lt; <span class="hljs-string">&quot;a &quot;</span> &lt;&lt; a.data_ &lt;&lt; endl;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面代码中，两个输出的是相同的地址，a 和b 的data指针指向了同一块内存，这就是浅拷贝，只是数据的简单赋值，那再析构时data内存会被释放两次，导致程序出问题。</p>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>(<span class="hljs-keyword">int</span> size) : <span class="hljs-built_in">size_</span>(size) &#123;<br>        data_ = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size];<br>    &#125;<br>    <span class="hljs-built_in">A</span>()&#123;&#125;<br>    <span class="hljs-built_in">A</span>(<span class="hljs-keyword">const</span> A&amp; a) &#123;<br>        size_ = a.size_;<br>        data_ = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size_];<br>        cout &lt;&lt; <span class="hljs-string">&quot;copy &quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>() &#123;<br>        <span class="hljs-keyword">delete</span>[] data_;<br>    &#125;<br>    <span class="hljs-keyword">int</span> *data_;<br>    <span class="hljs-keyword">int</span> size_;<br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-function">A <span class="hljs-title">a</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br>    A b = a;<br>    cout &lt;&lt; <span class="hljs-string">&quot;b &quot;</span> &lt;&lt; b.data_ &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;a &quot;</span> &lt;&lt; a.data_ &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>深拷贝就是再拷贝对象时，如果被拷贝对象内部还有指针引用指向其它资源，自己需要重新开辟一块新内存存储资源，而不是简单的赋值。</p>
+<h2 id="移动语义"><a href="#移动语义" class="headerlink" title="移动语义"></a>移动语义</h2><p><code>移动语义</code>，可以理解为转移所有权，之前的拷贝是对于别人的资源，自己重新分配一块内存存储复制过来的资源，而对于移动语义，类似于转让或者资源窃取的意思，对于那块资源，转为自己所拥有，别人不再拥有也不会再使用，通过C++11新增的移动语义可以省去很多拷贝负担，怎么利用移动语义呢，是通过移动构造函数。</p>
+<p>C++11最重要的一个改进之一就是引入了move语义，这样在一些对象的构造时可以获取到已有的资源（如内存）而不需要通过拷贝，申请新的内存，这样移动而非拷贝将会大幅度提升性能。例如有些右值即将消亡析构，这个时候我们用移动构造函数可以接管他们的资源</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>(<span class="hljs-keyword">int</span> size) : <span class="hljs-built_in">size_</span>(size) &#123;<br>        data_ = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size];<br>    &#125;<br>    <span class="hljs-built_in">A</span>()&#123;&#125;<br>    <span class="hljs-built_in">A</span>(<span class="hljs-keyword">const</span> A&amp; a) &#123;<br>        size_ = a.size_;<br>        data_ = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[size_];<br>        cout &lt;&lt; <span class="hljs-string">&quot;copy &quot;</span> &lt;&lt; endl;<br>    &#125;<br>    <span class="hljs-built_in">A</span>(A&amp;&amp; a) &#123;<br>        <span class="hljs-keyword">this</span>-&gt;data_ = a.data_;<br>        a.data_ = <span class="hljs-literal">nullptr</span>;<br>        cout &lt;&lt; <span class="hljs-string">&quot;move &quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>() &#123;<br>        <span class="hljs-keyword">if</span> (data_ != <span class="hljs-literal">nullptr</span>) &#123;<br>            <span class="hljs-keyword">delete</span>[] data_;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">int</span> *data_;<br>    <span class="hljs-keyword">int</span> size_;<br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-function">A <span class="hljs-title">a</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br>    A b = a;<br>    A c = std::<span class="hljs-built_in">move</span>(a); <span class="hljs-comment">// 调用移动构造函数</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果不使用std::move()，会有很大的拷贝代价，使用移动语义可以避免很多无用的拷贝，提供程序性能，C++所有的STL都实现了移动语义，方便我们使用。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">std::vector&lt;string&gt; vecs;<br>...<br>std::vector&lt;string&gt; vecm = std::<span class="hljs-built_in">move</span>(vecs); <span class="hljs-comment">// 免去很多拷贝</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：</p>
+</blockquote>
+<p>移动语义仅针对于那些实现了移动构造函数的类的对象，对于那种基本类型int、float等没有任何优化作用，还是会拷贝，因为它们没有实现对应的移动构造函数。</p>
+<h2 id="完美转发"><a href="#完美转发" class="headerlink" title="完美转发"></a>完美转发</h2><p><code>完美转发</code>指可以写一个接受任意实参的函数模板，并转发到其它函数，目标函数会收到与转发函数完全相同的实参，转发函数实参是左值那目标函数实参也是左值，转发函数实参是右值那目标函数实参也是右值。那如何实现完美转发呢，答案是使用 std::forward()</p>
+<p>例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintV</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;t)</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;lvalue&quot;</span> &lt;&lt; endl;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintV</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;&amp;t)</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;rvalue&quot;</span> &lt;&lt; endl;<br>&#125;<br><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Test</span><span class="hljs-params">(T &amp;&amp;t)</span> </span>&#123;<br>    <span class="hljs-built_in">PrintV</span>(t);<br>    <span class="hljs-built_in">PrintV</span>(std::forward&lt;T&gt;(t));<br><br>    <span class="hljs-built_in">PrintV</span>(std::<span class="hljs-built_in">move</span>(t));<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">Test</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// lvalue rvalue rvalue</span><br>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">Test</span>(a); <span class="hljs-comment">// lvalue lvalue rvalue</span><br>    <span class="hljs-built_in">Test</span>(std::forward&lt;<span class="hljs-keyword">int</span>&gt;(a)); <span class="hljs-comment">// lvalue rvalue rvalue</span><br>    <span class="hljs-built_in">Test</span>(std::forward&lt;<span class="hljs-keyword">int</span>&amp;&gt;(a)); <span class="hljs-comment">// lvalue lvalue rvalue</span><br>    <span class="hljs-built_in">Test</span>(std::forward&lt;<span class="hljs-keyword">int</span>&amp;&amp;&gt;(a)); <span class="hljs-comment">// lvalue rvalue rvalue</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Test(1)：1是右值，模板中T &amp;&amp;t这种为万能引用，右值1传到Test函数中变成了右值引用，但是调用PrintV()时候，t变成了左值，因为它变成了一个拥有名字的变量，所以打印lvalue，而PrintV(std::forward(t))时候，会进行完美转发，按照原来的类型转发，所以打印rvalue，PrintV(std::move(t))毫无疑问会打印rvalue。</p>
+</li>
+<li><p>Test(a)：a是左值，模板中T &amp;&amp;这种为万能引用，左值a传到Test函数中变成了左值引用，所以有代码中打印。</p>
+</li>
+<li><p>Test(std::forward(a))：转发为左值还是右值，依赖于T，T是左值那就转发为左值，T是右值那就转发为右值。</p>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[ 1 ] :左值引用、右值引用、移动语义、完美转发，你知道的不知道的都在这里<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/137662465">https://zhuanlan.zhihu.com/p/137662465</a></p>
+<p>[ 2 ] :C++11 左值、右值、右值引用详解<a target="_blank" rel="noopener" href="https://blog.csdn.net/hyman_yx/article/details/52044632">https://blog.csdn.net/hyman_yx/article/details/52044632</a></p>
+<p>[ 3 ] :C++11右值引用（一看即懂）<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7829.html">http://c.biancheng.net/view/7829.html</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/C-11-%E6%96%B0%E7%89%B9%E6%80%A7/">C++11 新特性</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/C-11/">C++11</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/04/c++11%E6%A8%A1%E6%9D%BF%E6%94%B9%E8%BF%9B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C++11 模板改进</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/03/c++11%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/">
+                        <span class="hidden-mobile">C++11 类型推导</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.lazyComments('valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "0g4dRYg6zRKUQ8ihzcTkjKbt-MdYXbMMI",
+          app_key: "iINw7nnmlKgqvC59j21ncCC8",
+          placeholder: "Just go go",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?64da8717546fc94735e3e2f05cfc89cb";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

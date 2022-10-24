@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avator.jpg">
+  <link rel="icon" href="/img/avator.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="pakchoi">
+  <meta name="keywords" content="">
+  
+  <title>树 Tree - pakchoi&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"pakchoi007.gitee.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"64da8717546fc94735e3e2f05cfc89cb","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="pakchoi's blogs" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>pakchoi</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/wenzhang.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="树 Tree">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      pakchoi
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-16 14:23" pubdate>
+        2021年4月16日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      33
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">树 Tree</h1>
+            
+            <div class="markdown-body">
+              <h1 id="数据结构-树"><a href="#数据结构-树" class="headerlink" title="数据结构-树"></a>数据结构-树</h1><p>树形结构相比数组、链表、堆栈这些数据结构来说，稍微复杂一点点，但树形结构可以用于解决很多实际问题，因为现实世界事物之间的关系往往不是线性关联的，而「树」恰好适合描述这种非线性关系。</p>
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p>线性结构中节点是首位相接一对一关系，在树结构中节点之间不再是简单的一对一关系，而是较为复杂的一对多的关系，一个节点可以与多个节点发生关联，树是一种层次化的数据组织形式，树在现实中是可以找到例子的，比如现实中的族谱，亲戚之间的关系是层次关联的树形关系。</p>
+<p>数据结构中的「树」的名字由来，是因为如果把节点之间的关系直观展示出来，由于长得和现实世界中的树很像，由此得名。如图：</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/link.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="树的特点"><a href="#树的特点" class="headerlink" title="树的特点"></a>树的特点</h3><p>树形数据结构，具有以下的结构特点：</p>
+<ul>
+<li>每个节点都只有有限个子节点或无子节点；</li>
+<li>没有父节点的节点称为根节点；</li>
+<li>每一个非根节点有且只有一个父节点；</li>
+<li>除了根节点外，每个子节点可以分为多个不相交的子树；</li>
+<li>树里面没有环路，意思就是从一个节点出发，除非往返，否则不能回到起点。</li>
+</ul>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><p>二叉树中每个节点的度不大于 2 ，即它的每个节点最多只有两个分支，通常称二叉树节点的左右两个分支为左右子树。</p>
+<p>二叉树是很多其他树型结构的基础结构，比如下面要讲的 <code>AVL 树</code>、<code>二叉查找树</code>，他们都是由二叉树增加一些约束条件进化而来。</p>
+<h3 id="三种遍历方式"><a href="#三种遍历方式" class="headerlink" title="三种遍历方式"></a>三种遍历方式</h3><p>二叉树的遍历就是逐个访问二叉树节点的数据，常见的二叉树遍历方式有三种，分别是前中后序遍历，初学者分不清这几个顺序的差别。</p>
+<p><strong>「有个简单的记忆方式，这里的「前中后」都是对于根节点而言」</strong>。</p>
+<p>先访问根节点后访问左右子树的遍历方式是前序遍历，先访问左右子树最后访问根节点的遍历方式是后序遍历，先访问左子树再访问根节点最后访问右子树的遍历方式是中序遍历，下面详细说明：</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/erchashu.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h4><p>遍历顺序是根节点-&gt;左子树-&gt;右子树</p>
+<p>遍历的得到的序列是：<code>1 2 4 5 3 6 7</code></p>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p>遍历顺序是左子树-&gt;根节点-&gt;右子树</p>
+<p>遍历的得到的序列是：<code>4 2 5 1 6 3 7</code></p>
+<h4 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h4><p>遍历顺序是左子树-&gt;右子树-&gt;根节点</p>
+<p>遍历的得到的序列是：<code>4 5 2 6 7 3 1</code></p>
+<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><p>由于最基础的二叉树节点是无序的，想象一下如果在二叉树中查找一个数据，最坏情况可能要要遍历整个二叉树，这样的查找效率是非常低下的。</p>
+<p>由于基础二叉树不利于数据的查找和插入，因此我们有必要对二叉树中的数据进行排序，所以就有了「二叉查找树」，可以说这种树是为了查找而生的二叉树，有时也称它为「二叉排序树」，都是同一种结构，只是换了个叫法。</p>
+<p>二叉查找树理解了也不难，简单来说就是二叉树上所有节点的，<strong>左子树上的节点都小于根节点，右子树上所有节点的值都大于根节点</strong>。</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/erchachazhaoshu.png" srcset="/img/loading.gif" lazyload></p>
+<p>这样的结构设计，使得查找目标节点非常方便，可以通过关键字和当前节点的对比，很快就能知道目标节点在该节点的左子树还是右子树上，方便在树中搜索目标节点。</p>
+<p>如果对<strong>排序二叉树执行中序遍历</strong>，因为<strong>中序遍历的顺序是：左子树-&gt;根节点-&gt;右子树</strong>，最终可以得到一个节点值的有序列表。</p>
+<p>举个栗子：对上图的排序二叉树执行中序遍历，我们可以得到一个有序序列：<code>1 2 3 4 5 6 7</code></p>
+<h3 id="查找效率"><a href="#查找效率" class="headerlink" title="查找效率"></a>查找效率</h3><p>二叉查找树的查询复杂度取决于目标节点的深度，因此当节点的深度比较大时，最坏的查询效率是<code>O(n)</code>，其中n是树中的节点个数。</p>
+<p>实际应用中有很多改进版的二叉查找树，目的是尽可能使得每个节点的深度不要过深，从而提高查询效率。比如AVL树和红黑树，可以将最坏效率降低至<code>O(log n)</code>，下面我们就来看下这两种改进的二叉树。</p>
+<h2 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h2><p>AVL 也叫<strong>平衡二叉查找树</strong>。AVL 这个名字的由来，是它的两个发明者G. M. Adelson-Velsky 和 Evgenii Landis 的缩写，AVL最初是他们两人在1962 年的论文「An algorithm for the organization of information」中提出来一种数据结构。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>AVL树有更严格的定义：在二叉查找树中，任一节点对应的两棵子树的最大高度差为 1，这样的二叉查找树称为平衡二叉树。其中左右子树的高度差也有个专业的叫法：平衡因子。</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/AVLshu.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="AVL树的旋转"><a href="#AVL树的旋转" class="headerlink" title="AVL树的旋转"></a>AVL树的旋转</h3><p>一旦由于插入或删除导致左右子树的高度差大于1，此时就需要旋转某些节点调整树高度，使其再次达到平衡状态，这个过程称为旋转再平衡。</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/AVLxuanzhuan.png" srcset="/img/loading.gif" lazyload></p>
+<p>保持树平衡的目的是可以控制查找、插入和删除在平均和最坏情况下的时间复杂度都是<code>O(log n)</code>，相比普通二叉树最坏情况的时间复杂度是 <code>O(n)</code> ，AVL树把最坏情况的复杂度控制在可接受范围，非常合适对算法执行时间敏感类的应用。</p>
+<h2 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h2><p>B树是鲁道夫·拜尔（Rudolf Bayer）1972年在波音研究实验室（Boeing Research Labs）工作时发明的，关于B树名字的由来至今是个未解之谜，有人猜是Bayer的首字母，也有人说是波音实验室（Boeing Research Labs）的Boeing首字母缩写，虽然B树这个名字来源扑朔迷离，我们心里也没点 B 树，但不影响今天我们来学习它。</p>
+<h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>一个 m 阶的 B树 是一个有以下属性的树</p>
+<ol>
+<li>每一个节点最多有 m 个子节点</li>
+<li>每一个非叶子节点（除根节点）最少有 ⌈m/2⌉ 个子节点，⌈m/2⌉ 表示向上取整。</li>
+<li>如果根节点不是叶子节点，那么它至少有两个子节点</li>
+<li>有 k 个子节点的非叶子节点拥有 k − 1 个键</li>
+<li>所有的叶子节点都在同一层</li>
+</ol>
+<p>如果之前不了解，相信第一眼看完定义肯定是蒙圈，不过多看几遍好好理解一下就好了，画个图例，对照着看看：</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/bshu.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>B树是所有节点的平衡因子均等于0的多路查找树（ AVL树 是平衡因子不大于 1 的二叉查找树）。</li>
+<li>B 树节点可以保存多个数据，使得 B 树可以不用像 AVL 树那样为了保持平衡频繁的旋转节点。</li>
+<li>B树的多路的特性，降低了树的高度，所以B树相比于平衡二叉树显得矮胖很多。</li>
+<li>B树非常适合保存在磁盘中的数据读取，因为每次读取都会有一次磁盘IO，高度降低减少了磁盘IO的次数。</li>
+</ul>
+<p>B树常用于实现<strong>数据库索引</strong>，典型的实现，<strong>MongoDB索引</strong>用<code>B树</code>实现，<strong>MySQL的Innodb 存储引擎</strong>用 <code>B+树</code> 存放索引。</p>
+<p>说到B树不得不提起它的好兄弟B+树，不过这里不展开细说，只需知道，B+树是对B树的改进，数据都放在叶子节点，非叶子节点只存数据索引。</p>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>红黑树也是一种特殊的「二叉查找树」。</p>
+<p>到目前为止我们学习的 AVL 树和即将学习的红黑树都是二叉查找树的变体，可见二叉查找树真的是非常重要基础二叉树，如果忘了它的定义可以先回头看看。</p>
+<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><p>红黑树中每个结点都被标记了红黑属性，红黑树除了有普通的「二叉查找树」特性之外，还有以下的特征：</p>
+<ol>
+<li>节点是红色或黑色。</li>
+<li>根是黑色。</li>
+<li>所有叶子都是黑色（叶子是NIL节点）。</li>
+<li>每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</li>
+<li>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
+</ol>
+<p>这些性质有兴趣可以自行研究，不过，现在你只需要知道，这些约束确保了红黑树的关键特性：从根到叶子的最长的可能路径不多于最短的可能路径的两倍长。</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/hongheishu.png" srcset="/img/loading.gif" lazyload></p>
+<p>而节点的路径长度决定着对节点的查询效率，这样我们确保了，最坏情况下的查找、插入、删除操作的时间复杂度不超过<code>O(log n)</code>，并且有较高的插入和删除效率。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>红黑树在实际应用中比较广泛，有很多已经落地的实践，比如学习C++的同学都知道会接触到 STL 标准库，而STL容器中的<code>map</code>、<code>set</code>、<code>multiset</code>、<code>multimap</code> 底层实现都是基于红黑树。</p>
+<p>再比如，Linux内核中也有红黑树的实现，Linux系统在实现<code>EXT3文件系统</code>、<code>虚拟内存管理系统</code>，都有使用到红黑树这种数据结构。</p>
+<h2 id="红黑树-VS-平衡二叉树（AVL树）"><a href="#红黑树-VS-平衡二叉树（AVL树）" class="headerlink" title="红黑树  VS  平衡二叉树（AVL树）"></a>红黑树  VS  平衡二叉树（AVL树）</h2><ul>
+<li>插入和删除操作，一般认为红黑树的删除和插入会比 AVL 树更快。因为，红黑树不像 AVL 树那样严格的要求平衡因子小于等于1，这就减少了为了达到平衡而进行的旋转操作次数，可以说是牺牲严格平衡性来换取更快的插入和删除时间。</li>
+<li>红黑树不要求有不严格的平衡性控制，但是红黑树的特点，使得任何不平衡都会在<strong>三次旋转</strong>之内解决。而 AVL 树如果不平衡，并不会控制旋转操作次数，旋转直到平衡为止。</li>
+<li>查找操作，AVL树的效率更高。因为 AVL 树设计比红黑树更加平衡，不会出现平衡因子超过 1 的情况，减少了树的平均搜索长度。</li>
+</ul>
+<h2 id="Trie树（前缀树或字典树）"><a href="#Trie树（前缀树或字典树）" class="headerlink" title="Trie树（前缀树或字典树）"></a>Trie树（前缀树或字典树）</h2><p>Trie来源于单词 retrieve（检索），Trie树也称为前缀树或字典树。利用字符串前缀来查找指定的字符串，缩短查找时间提高查询效率，主要用于字符串的快速查找和匹配。</p>
+<h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p>Trie的核心思想是空间换时间，有 3 个基本性质：</p>
+<ol>
+<li>根节点不包含字符，除根节点外每一个节点都只包含一个字符。</li>
+<li>从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串。</li>
+<li>每个节点的所有子节点包含的字符都不相同。</li>
+</ol>
+<p>比如对单词序列<code>lru, lua, mem, mcu</code> 建立Trie树如下：</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/Tire.png" srcset="/img/loading.gif" lazyload></p>
+<p>Trie树建立和查询是可以同步进行的，可以在还没建立出完成的 Trie 树之前就找到目标数据，而如果用 Hash 表等结构存储是需要先建立完成表才能开始查询，这也是 Trie 树查询速度快的原因。</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>Trie树还用于搜索引擎的关键词提示功能。比如当你在搜索框中输入检索单词的开头几个字，搜索引擎就可以自动联想匹配到可能的词组出来，这正是Trie树的最直接应用。</p>
+<p><img src="/2021/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/sousuo.png" srcset="/img/loading.gif" lazyload></p>
+<p>这种结构在海量数据查询上很有优势，因为不必为了找到目标数据遍历整个数据集合，只需按前缀遍历匹配的路径即可找到目标数据。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>树形数据结构有许多变种，这篇文章我们从树开始，把几种常见树形数据结构学习了一遍，包括二叉树、二叉查找树（二叉搜索树）、AVL树、红黑树、B树、Trie树。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Tree/">Tree</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/19/%E5%BA%8F%E5%88%97%E5%8C%96%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">序列化二叉树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/15/7_%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+                        <span class="hidden-mobile">桶排序</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.lazyComments('valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#valine",
+          app_id: "0g4dRYg6zRKUQ8ihzcTkjKbt-MdYXbMMI",
+          app_key: "iINw7nnmlKgqvC59j21ncCC8",
+          placeholder: "Just go go",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?64da8717546fc94735e3e2f05cfc89cb";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
